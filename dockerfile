@@ -32,11 +32,18 @@ RUN useradd \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir /var/lib/apt/lists/partial
 
-RUN curl https://launchpadlibrarian.net/374116317/printer-driver-escpr_1.6.21-1_armhf.deb --output printer-driver-escpr_1.6.21-1_armhf.deb
-COPY install.sh .
-RUN sh install.sh printer-driver-escpr_1.6.21-1_armhf.deb
+RUN sudo apt-get update \
+  && sudo apt-get install wget \
+  && sudo apt-get install dc \
+  && wget -O foo2zjs.tar.gz http://foo2zjs.rkkda.com/foo2zjs.tar.gz \
+  && tar zxf foo2zjs.tar.gz \
+  && cd foo2zjs \
+  && make \
+  && ./getweb 1020 \
+  && sudo make install
 
 COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
+COPY entrypoint.sh /
 
 EXPOSE 631
-ENTRYPOINT ["/usr/sbin/cupsd", "-f"]
+ENTRYPOINT /entrypoint.sh
