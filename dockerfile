@@ -35,12 +35,10 @@ RUN useradd \
 RUN sudo apt-get update \
   && sudo apt-get install wget \
   && sudo apt-get install dc \
-  && wget -O foo2zjs.tar.gz http://foo2zjs.rkkda.com/foo2zjs.tar.gz \
-  && tar zxf foo2zjs.tar.gz \
+  && sudo apt-get install git \
+  && git clone https://github.com/koenkooi/foo2zjs.git  \
   && cd foo2zjs \
-  && make \
-  && ./getweb 1020 \
-  && sudo make install
+  && make
 
 COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
 COPY entrypoint.sh /

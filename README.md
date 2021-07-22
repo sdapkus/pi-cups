@@ -33,3 +33,12 @@ http://<YOUR_PI_IP_ADDRESS>:631
 u: print
 
 p: print
+
+
+## First run
+```bash
+cd foo2zjs
+./getweb 1020
+sudo make install
+cat /usr/share/foo2zjs/firmware/sihp1020.dl > /dev/usb/lp0
+```
