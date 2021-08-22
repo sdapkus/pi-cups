@@ -1,4 +1,4 @@
-FROM balenalib/raspberrypi3-debian
+FROM balenalib/armv7hf-debian:latest
 
 RUN apt-get update && apt-get install -y \
   curl \
