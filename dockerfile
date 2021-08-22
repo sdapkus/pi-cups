@@ -32,11 +32,14 @@ RUN useradd \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir /var/lib/apt/lists/partial
 
-RUN sudo apt-get update \
-  && sudo apt-get install wget \
-  && sudo apt-get install dc \
-  && sudo apt-get install git \
-  && git clone https://github.com/koenkooi/foo2zjs.git
+RUN sudo apt-get update -y \
+  wget \
+  dc \
+  git \
+  make \
+  build-essential
+
+RUN git clone https://github.com/koenkooi/foo2zjs.git
 #   && cd foo2zjs \
 #   && sudo make \
 #   && sudo make install
