@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
   cups-client \
   cups-bsd \
   printer-driver-all \
-  lsb
+  lsb-release
 
 RUN sed -i "s/^#\ \+\(en_US.UTF-8\)/\1/" /etc/locale.gen \
   && locale-gen en_US en_US.UTF-8
@@ -36,10 +36,10 @@ RUN sudo apt-get update \
   && sudo apt-get install wget \
   && sudo apt-get install dc \
   && sudo apt-get install git \
-  && git clone https://github.com/koenkooi/foo2zjs.git  \
-  && cd foo2zjs \
-  && sudo make \
-  && sudo make install
+  && git clone https://github.com/koenkooi/foo2zjs.git
+#   && cd foo2zjs \
+#   && sudo make \
+#   && sudo make install
 
 COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
 COPY entrypoint.sh /
