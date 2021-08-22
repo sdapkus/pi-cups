@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian
+FROM balenalib/raspberrypi3-debian
 
 RUN apt-get update && apt-get install -y \
   curl \
@@ -38,7 +38,8 @@ RUN sudo apt-get update \
   && sudo apt-get install git \
   && git clone https://github.com/koenkooi/foo2zjs.git  \
   && cd foo2zjs \
-  && make
+  && sudo make \
+  && sudo make install
 
 COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
 COPY entrypoint.sh /

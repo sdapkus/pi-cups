@@ -38,7 +38,7 @@ p: print
 ## First run
 ```bash
 cd foo2zjs
-./getweb 1020
 sudo make install
+sudo make
 cat /usr/share/foo2zjs/firmware/sihp1020.dl > /dev/usb/lp0
 ```
