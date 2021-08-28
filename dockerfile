@@ -38,12 +38,13 @@ RUN sudo apt-get update \
   dc \
   git \
   make \
-  build-essential
+  build-essential \
+  vim
 
 RUN git clone https://github.com/koenkooi/foo2zjs.git
-#   && cd foo2zjs \
-#   && sudo make \
-#   && sudo make install
+  && cd foo2zjs \
+  && make \
+  && make install
 
 COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
 COPY entrypoint.sh /
