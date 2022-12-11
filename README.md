@@ -46,6 +46,21 @@ cat /usr/share/foo2zjs/firmware/sihp1020.dl > /dev/usb/lp0
 
 ## Hotplug hack
 
+# On host machine:
+
+Create `reload.sh` with content:
+```bash
+#!/bin/bash
+
+docker-compose -f <path to>/docker-compose.yaml  stop
+docker-compose -f <path to>/docker-compose.yaml up -d
+```
+
+Run
+```bash
+sudo chmod +x reload.sh
+```
+
 Run
 ```bash
 udevadm monitor --kernel --property --subsystem-match=usb
@@ -64,31 +79,35 @@ DEVPATH=/devices/pci0000:00/0000:00:0c.0/usb1/1-2
 DEVTYPE=usb_device      
 MAJOR=189
 MINOR=9
-PRODUCT=90c/1000/1100  <--------------------------------------------------------- ENV{PRODUCT}
+PRODUCT=90c/1000/1100  <---------------------------------------------------------
 SEQNUM=2192
-SUBSYSTEM=usb          <--------------------------------------------------------- " SUBSYSTEM=="type_of_device"
+SUBSYSTEM=usb          <---------------------------------------------------------
 ```
 
 Edit file `/etc/udev/rules.d/test.rules`
 Add:
-
 ```bash
-ACTION=="add", SUBSYSTEM=="usb", ENV{PRODUCT}=="90c/1000/1100", RUN=="/bin/bash /root/pi-cups/hotplug.sh"
+ACTION=="add", SUBSYSTEM=="<<copy_subsystem>>", ENV{PRODUCT}=="<<copy_product>>", RUN=="/bin/bash <path to>/hotplug.sh"
 ```
 
-Create & edit file `/root/pi-cups/hotplug.sh`
+not sure if neede -- udevadm control --reload
 
+# Inside docker container
+
+Create `/hotplug.sh`
 ```bash
-#/bin/bash
-sleep 5
+#!/bin/bash
+
+sleep 2
 cat /usr/share/foo2zjs/firmware/sihp1020.dl > /dev/usb/lp0
 ```
 
 Run
 ```bash
-chmod +x /root/pi-cups/hotplug.sh
-udevadm control --reload
+chmod +x /hotplug.sh
 ```
 
-
-Done! On each printer connection driver should be auto-loaded.
+edit `/entrypoint.sh` and add to second line
+```bash
+./hotplug.sh
+```
