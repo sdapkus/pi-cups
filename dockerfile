@@ -41,7 +41,7 @@ RUN sudo apt-get update \
   build-essential \
   vim
 
-RUN git clone https://github.com/koenkooi/foo2zjs.git
+RUN git clone https://github.com/koenkooi/foo2zjs.git \
   && cd foo2zjs \
   && make \
   && make install
