@@ -46,7 +46,7 @@ cat /usr/share/foo2zjs/firmware/sihp1020.dl > /dev/usb/lp0
 
 ## Hotplug hack
 
-# On host machine:
+### On host machine:
 
 Create `reload.sh` with content:
 ```bash
@@ -92,7 +92,7 @@ ACTION=="add", SUBSYSTEM=="<<copy_subsystem>>", ENV{PRODUCT}=="<<copy_product>>"
 
 not sure if neede -- udevadm control --reload
 
-# Inside docker container
+### Inside docker container
 
 Create `/hotplug.sh`
 ```bash
