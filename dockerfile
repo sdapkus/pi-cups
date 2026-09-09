@@ -47,6 +47,7 @@ RUN git clone https://github.com/koenkooi/foo2zjs.git \
   && make install
 
 COPY etc/cups/cupsd.conf /etc/cups/cupsd.conf
+COPY hotplug.sh /
 COPY entrypoint.sh /
 
 EXPOSE 631
