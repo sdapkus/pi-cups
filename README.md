@@ -78,3 +78,10 @@ Reload udev
 ```bash
 udevadm control --reload
 ```
+
+If printing does not work from the iPhone
+```bash
+lpadmin -p <printer-name> -o pdftops-renderer=gs
+```
+
+use `lpstat -p` to find printer name
